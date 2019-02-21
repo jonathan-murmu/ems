@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
-import Typography from '@material-ui/core/Typography';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
+import AdminDashboard from './containers/AdminDashboard/AdminDashboard';
+import AdminOrders from './containers/AdminOrders/AdminOrders'
 import Layout from './hoc/Layout/Layout';
 
 class App extends Component {
   render() {
+    let routes = (
+      <Switch>
+        <Route exact path='/admin/dashboard' component={AdminDashboard}/>
+        <Route path="/admin/orders" component={AdminOrders} />
+        <Redirect to="/admin/dashboard" />
+      </Switch>
+    );
     return (
       <Layout>
-        <Typography component="h2" variant="h1" gutterBottom>
-          h1. Heading
-        </Typography>
+        {routes}
       </Layout>
     );
   }

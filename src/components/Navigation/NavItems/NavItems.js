@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import Divider from '@material-ui/core/Divider';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
@@ -15,10 +16,10 @@ const navItems = (props) => {
         <Aux>
             <Divider />
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                <ListItem button key={text}>
+                {['dashboard', 'orders', 'Send email', 'Drafts'].map((text, index) => (
+                <ListItem button key={text} component={NavLink} to={"/admin/"+text}>
                     <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                    <ListItemText primary={text} />
+                    <ListItemText primary={text.charAt(0).toUpperCase() + text.substr(1).toLowerCase()} />
                 </ListItem>
                 ))}
             </List>
