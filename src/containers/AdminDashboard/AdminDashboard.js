@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 import Typography from '@material-ui/core/Typography';
 
-class Home extends Component {
+class AdminDashboard extends Component {
     render () {
         return (
-            <Typography component="h2" variant="h1" gutterBottom>
+            <Typography component="h4" variant="h4" gutterBottom>
                 Admin Dashboard
             </Typography>
         );
@@ -13,4 +13,4 @@ class Home extends Component {
     }
 };
 
-export default Home;
+export default AdminDashboard;

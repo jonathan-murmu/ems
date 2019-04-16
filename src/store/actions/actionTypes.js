@@ -1,0 +1,4 @@
+
+export const SET_ORDERS = 'SET_ORDERS';
+export const SET_ORDERS_FAILED = 'SET_ORDERS_FAILED';
+export const INITIATE_GET_ORDERS = 'INITIATE_GET_ORDERS';
