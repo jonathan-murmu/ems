@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import MaterialTable from 'material-table'
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as adminOrdersAction from '../../store/actions/index';  // index can be omitted 
 import axios from '../../axios_admin';
+import Aux from '../../hoc/Aux/Aux';
 
 
 class AdminOrders extends Component {
@@ -19,13 +21,26 @@ class AdminOrders extends Component {
         this.props.getOrders();
     }
     render () {
+        let orderData = [];
         if ( this.props.orders ) {
-            console.log(this.props.orders);
+            orderData = this.props.orders.orders;
         }
+        
         return (
-            <Typography component="h4" variant="h4" gutterBottom>
-                Admin Orders
-            </Typography>
+            <Grid container spacing={24}>
+                <Grid item xs={12}>
+                    <MaterialTable
+                        columns={[
+                            { title: 'Order ID', field: 'orderId' },
+                            { title: 'Name', field: 'name' },
+                            { title: 'Venue', field: 'venue' },
+                            { title: 'Date', field: 'date', },
+                        ]}
+                        data={orderData}
+                        title="Orders"
+                        />
+                </Grid>
+            </Grid>
         );
         
     }
