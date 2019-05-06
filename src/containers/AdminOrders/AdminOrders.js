@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Grid from '@material-ui/core/Grid';
 import MaterialTable from 'material-table'
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as adminOrdersAction from '../../store/actions/index';  // index can be omitted 
+import DetailOrder from '../../components/DetailOrder/DetailOrder';
 import axios from '../../axios_admin';
 import Aux from '../../hoc/Aux/Aux';
 
@@ -24,25 +24,28 @@ class AdminOrders extends Component {
         let orderData = [];
         if ( this.props.orders ) {
             orderData = this.props.orders.orders;
+            console.log(orderData)
         }
         
         return (
-            <Grid container spacing={24}>
-                <Grid item xs={12}>
-                    <MaterialTable
-                        columns={[
-                            { title: 'Order ID', field: 'orderId' },
-                            { title: 'Name', field: 'name' },
-                            { title: 'Venue', field: 'venue' },
-                            { title: 'Date', field: 'date', },
-                        ]}
-                        data={orderData}
-                        title="Orders"
-                        />
-                </Grid>
-            </Grid>
+            <div style={{ maxWidth: '100%' }}>
+                <MaterialTable
+                    columns={[
+                        { title: 'Order ID', field: 'orderId' },
+                        { title: 'Name', field: 'name' },
+                        { title: 'Venue', field: 'venue' },
+                        { title: 'Date', field: 'date', },
+                    ]}
+                    data={orderData}
+                    title="Orders"
+                    detailPanel={rowData => {
+                        return (
+                            <DetailOrder rowData={rowData} />
+                        )
+                    }}
+                    />
+            </div>
         );
-        
     }
 };
 const mapStateToProps = state => {
@@ -58,4 +61,3 @@ const mapDispatchToProps = dispatch => {
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(AdminOrders, axios));
-// export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Photogrid, axios));
